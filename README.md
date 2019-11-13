@@ -23,12 +23,16 @@ apt install direnv
 Quick Setup
 -----------
 ```
+One time
+
 cp .env.template .env
 docker-compose -f dc-prod.yml up
 # wait till db is initialized then Ctrl + C
 ./deploy.sh
 # to create super user
 docker-compose exec app python manage.py createsuperuser
+
+From second time docker-compose up is sufficient
 
 Goto http://localhost/
 
