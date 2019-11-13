@@ -1,0 +1,48 @@
+version: '2.2'
+
+services:
+  db:
+    image: postgres:9.6-alpine
+    healthcheck:
+      test: pg_isready || exit 1
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+    ports:
+      - 8432:5432
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    image: tsm/app
+    healthcheck:
+      test: wget -q 127.0.0.1:8000
+    init: true
+    restart: always
+    env_file: ./.env
+    volumes:
+      - backend-static:/root/src/static
+      - ./media:/root/src/media
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:stable-alpine
+    restart: always
+    environment:
+    - NGINX_HOST=${NGINX_HOST}
+    volumes:
+    - ./nginx/conf/default.template:/tmp/default.template
+    - backend-static:/src/static:ro
+    - ./media:/src/media:ro
+    links:
+    - app:app
+    command: /bin/sh -c "envsubst '$$NGINX_HOST' < /tmp/default.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    ports:
+    - 80:80
+
+volumes:
+  backend-static:

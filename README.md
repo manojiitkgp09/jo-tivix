@@ -23,14 +23,16 @@ apt install direnv
 Quick Setup
 -----------
 ```
-
-docker-compose up
+cp .env.template .env
+docker-compose -f dc-prod.yml up
 # wait till db is initialized then Ctrl + C
 ./deploy.sh
 # to create super user
-docker-compose exec python manage.py createsuperuser
-Open http://localhost/
+docker-compose exec app python manage.py createsuperuser
 
+Goto http://localhost/
+
+Note: User is Teacher
 ```
 
 Setup virtualenv (for development)

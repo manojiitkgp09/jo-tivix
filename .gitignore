@@ -4,7 +4,6 @@
 .envrc
 .idea/
 *~
-docker-compose.yml
 redis/
 db/
 media/
