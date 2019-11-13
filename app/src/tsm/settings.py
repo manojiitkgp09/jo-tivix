@@ -2,7 +2,6 @@
 Django settings for tsm project.
 """
 
-import datetime as dt
 import environ
 import sentry_sdk
 import logging
@@ -49,31 +48,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-# Content Security Policy
-CSP_ENABLED = env.bool('CSP_ENABLED')
-if CSP_ENABLED:
-    MIDDLEWARE.append('csp.middleware.CSPMiddleware')
-
-    CSP_REPORT_ONLY = env.bool('CSP_REPORT_ONLY', default=True)
-    CSP_REPORT_URL = env('CSP_REPORT_URL', default=None) or None
-
-    CSP_DEFAULT_SRC = env.tuple('CSP_DEFAULT_SRC')
-    CSP_SCRIPT_SRC = env.tuple('CSP_SCRIPT_SRC')
-    CSP_STYLE_SRC = env.tuple('CSP_STYLE_SRC')
-    CSP_FONT_SRC = env.tuple('CSP_FONT_SRC')
-    CSP_IMG_SRC = env.tuple('CSP_IMG_SRC')
-    CSP_MEDIA_SRC = env.tuple('CSP_MEDIA_SRC')
-    CSP_OBJECT_SRC = env.tuple('CSP_OBJECT_SRC')
-    CSP_FRAME_SRC = env.tuple('CSP_FRAME_SRC')
-    CSP_CONNECT_SRC = env.tuple('CSP_CONNECT_SRC')
-    CSP_CHILD_SRC = env.tuple('CSP_CHILD_SRC')
-    CSP_MANIFEST_SRC = env.tuple('CSP_MANIFEST_SRC')
-    CSP_WORKER_SRC = env.tuple('CSP_WORKER_SRC')
-
-    CSP_BLOCK_ALL_MIXED_CONTENT = env.bool('CSP_BLOCK_ALL_MIXED_CONTENT', default=False)
-    CSP_EXCLUDE_URL_PREFIXES = env.tuple('CSP_EXCLUDE_URL_PREFIXES', default=tuple())
-
 
 ROOT_URLCONF = 'tsm.urls'
 
@@ -160,8 +134,6 @@ if HTTPS_PROXY_HEADER and not DEBUG:
     SECURE_PROXY_SSL_HEADER = (f'HTTP_{HTTPS_PROXY_HEADER}', 'https')
 else:
     SECURE_PROXY_SSL_HEADER = None
-
-
 
 
 if env('SENTRY_DSN', default=''):
