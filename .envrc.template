@@ -1,0 +1,13 @@
+export POSTGRES_DB=tsm
+export POSTGRES_PASSWORD=xT6kMfISXSVJRTv8
+export SECRET_KEY='jq6ikiWMEHEe3Yyx8uJqZ1fSUxcZ3jfyNJ8SEdZHE2EOvZxIfM'
+export DATABASE_URL=postgres://postgres:xT6kMfISXSVJRTv8@localhost:8432/tsm
+
+export DEBUG=on
+export EMAIL_HOST=
+export EMAIL_PORT=
+export EMAIL_HOST_USER=
+export EMAIL_HOST_PASSWORD=
+export SENTRY_DSN=https://<key>@sentry.io/<project>
+export HTTPS_REDIRECT=n
+export HTTPS_PROXY_HEADER=X_SCHEME

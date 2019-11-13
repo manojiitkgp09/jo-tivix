@@ -1,0 +1,110 @@
+server {
+    listen      80;
+    
+    # uncomment for letsencrypt https
+    # listen      443           ssl http2;
+    
+    server_name               ${NGINX_HOST};
+
+    
+    # uncomment for letsencrypt https
+    # add_header                Strict-Transport-Security "max-age=31536000" always;
+
+    # ssl_session_cache         shared:SSL:20m;
+    # ssl_session_timeout       10m;
+
+    # ssl_protocols             TLSv1 TLSv1.1 TLSv1.2;
+    # ssl_prefer_server_ciphers on;
+    # ssl_ciphers               "ECDH+AESGCM:ECDH+AES256:ECDH+AES128:!ADH:!AECDH:!MD5;";
+
+    # ssl_stapling              on;
+    # ssl_stapling_verify       on;
+
+    # ssl_certificate           /etc/letsencrypt/live/${NGINX_HOST}/fullchain.pem;
+    # ssl_certificate_key       /etc/letsencrypt/live/${NGINX_HOST}/privkey.pem;
+    # ssl_trusted_certificate   /etc/letsencrypt/live/${NGINX_HOST}/chain.pem;
+
+    # resolver 8.8.8.8 8.8.4.4 valid=300s;
+    # resolver_timeout 5s;
+    
+
+    
+    gzip on;
+    gzip_static on;
+    gzip_proxied any;
+    gzip_vary on;
+    gzip_comp_level 6;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types
+        # text/html is always in gzip_types
+        text/richtext
+        text/plain
+        text/css
+        text/x-script
+        text/x-component
+        text/x-java-source
+        text/x-markdown
+        application/javascript
+        application/x-javascript
+        text/javascript
+        text/js
+        image/x-icon
+        application/x-perl
+        application/x-httpd-cgi
+        text/xml
+        application/xml
+        application/xml+rss
+        application/json
+        multipart/bag
+        multipart/mixed
+        application/xhtml+xml
+        font/ttf
+        font/otf
+        font/x-woff
+        image/svg+xml
+        application/vnd.ms-fontobject
+        application/ttf
+        application/x-ttf
+        application/otf
+        application/x-otf
+        application/truetype
+        application/opentype
+        application/x-opentype
+        application/font-woff
+        application/eot
+        application/font
+        application/font-sfnt
+        application/wasm;
+    
+
+    access_log                /dev/stdout;
+    error_log                 /dev/stderr info;
+
+    client_max_body_size 100M;
+
+    location /static/ {
+        root /srv/;
+    }
+
+    location /media/ {
+        root /srv/;
+    }
+
+    
+    # uncomment for letsencrypt https
+    # location ^~ /.well-known {
+    #     allow all;
+    #     root  /data/letsencrypt/;
+    # }
+    
+
+    location / {
+        proxy_pass_header Server;
+        proxy_redirect off;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X_SCHEME $scheme;
+        proxy_pass http://app:8000/;
+    }
+}
