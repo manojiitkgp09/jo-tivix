@@ -26,7 +26,7 @@ Quick Setup
 One time
 
 cp .env.template .env
-docker-compose -f dc-prod.yml up
+docker-compose up
 # wait till db is initialized then Ctrl + C
 ./deploy.sh
 # to create super user
