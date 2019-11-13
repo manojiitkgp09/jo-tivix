@@ -20,7 +20,7 @@ RUN python3 -m compileall -b -f -q /root/
 
 
 FROM $BASE_IMAGE AS secondary-image
-
+RUN apk --no-cache add libpq
 WORKDIR /root/src/
 ENV PYTHONUNBUFFERED=1
 ENV PATH=/root/.local/bin:$PATH

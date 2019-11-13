@@ -20,6 +20,18 @@ snap install docker
 apt install direnv
 ```
 
+Quick Setup
+-----------
+```
+
+docker-compose up
+# wait till db is initialized then Ctrl + C
+./deploy.sh
+# to create super user
+docker-compose exec python manage.py createsuperuser
+Open http://localhost/
+
+```
 
 Setup virtualenv (for development)
 ----------------------------------

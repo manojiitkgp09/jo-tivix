@@ -84,11 +84,11 @@ server {
     client_max_body_size 100M;
 
     location /static/ {
-        root /srv/;
+        root /src/;
     }
 
     location /media/ {
-        root /srv/;
+        root /src/;
     }
 
     
