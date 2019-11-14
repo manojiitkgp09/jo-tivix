@@ -73,5 +73,8 @@ class TeacherStudentAdmin(admin.ModelAdmin):
         if not request.user.is_superuser:
             return ['teacher', 'student']
 
+    def has_add_permission(self, request):
+        return False
+
 
 admin.site.register(User, CustomUserAdmin)

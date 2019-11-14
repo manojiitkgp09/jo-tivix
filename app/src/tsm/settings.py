@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 
     'django_extensions',
 
+    'graphene_django',
     'tsm.core',
 
 ]
@@ -148,3 +149,7 @@ if env('SENTRY_DSN', default=''):
     )
 
 AUTH_USER_MODEL = 'core.User'
+
+GRAPHENE = {
+    'SCHEMA': 'tsm.core.schema'
+}
