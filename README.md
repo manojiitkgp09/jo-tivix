@@ -38,6 +38,29 @@ Goto http://localhost/
 
 Note: User is Teacher
 ```
+Test Coverage Report
+---------------
+|Module|statements|missing|excluded|coverage|
+|--- |--- |--- |--- |--- |
+|Total|295|145|0|51%|
+|manage.py|13|6|0|54%|
+|requirements_freeze.py|110|110|0|0%|
+|tsm/__init__.py|0|0|0|100%|
+|tsm/celery.py|0|0|0|100%|
+|tsm/core/__init__.py|1|0|0|100%|
+|tsm/core/admin.py|49|16|0|67%|
+|tsm/core/apps.py|5|0|0|100%|
+|tsm/core/migrations/0001_initial.py|10|0|0|100%|
+|tsm/core/migrations/0002_auto_20191113_0126.py|6|0|0|100%|
+|tsm/core/migrations/0003_auto_20191113_0205.py|5|0|0|100%|
+|tsm/core/migrations/__init__.py|0|0|0|100%|
+|tsm/core/models.py|21|2|0|90%|
+|tsm/core/signals.py|11|0|0|100%|
+|tsm/core/tasks.py|0|0|0|100%|
+|tsm/core/tests.py|15|0|0|100%|
+|tsm/settings.py|40|7|0|82%|
+|tsm/urls.py|5|0|0|100%|
+|tsm/wsgi.py|4|4|0|0%|
 
 Setup virtualenv (for development)
 ----------------------------------
